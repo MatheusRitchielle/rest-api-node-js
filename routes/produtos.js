@@ -1,21 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-//Retorna todos os produtos
 router.get("/", (req, res, next) => {
     res.status(200).send({
         mensagem: "Lista com todos os produtos."
     });
 });
 
-//Cadastra um produto
 router.post("/", (req, res, next) => {
+    const   produto = {
+        nome: req.body.nome,
+        preco: req.body.preco
+    };
     res.status(201).send({
-        mensagem: "Produto cadastrado."
+        mensagem: "Produto cadastrado.",
+        produtoCriado: produto
     })
 })
 
-//Retorna apenas um produto
 router.get("/:id_produto", (req, res, next) => {
     const id = req.params.id_produto
 
@@ -31,14 +33,12 @@ router.get("/:id_produto", (req, res, next) => {
     }
 })
 
-//Atualiza um produto
 router.patch("/", (req, res, next) => {
     res.status(201).send({
         mensagem: "Produto atualizado."
     })
 })
 
-//Exclui um produto
 router.delete("/", (req, res, next) =>{
     res.status(201).send({
         mensagem: "Produto excluído"

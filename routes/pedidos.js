@@ -1,21 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-//Retorna todos os pedidos
 router.get("/", (req, res, next) => {
     res.status(200).send({
         mensagem: "Lista com todos os pedidos.",
     });
 });
 
-//Cadastra um pedido
 router.post("/", (req, res, next) => {
+    const pedido = {
+        id_produto: req.body.id_produto,
+        quantidade: req.body.quantidade
+    }
     res.status(201).send({
-        mensagem: "Pedido cadastrado",
+        mensagem: "Pedido criado",
+        pedidoCriado: pedido
     });
 });
 
-//Retorna apenas um pedido
 router.get("/:id_pedido", (req, res, next) => {
     res.status(200).send({
         mensagem: "Detalhes do pedido",
@@ -23,7 +25,6 @@ router.get("/:id_pedido", (req, res, next) => {
     });
 });
 
-//Exclui um pedido
 router.delete("/", (req, res, next) => {
     res.status(201).send({
         mensagem: "Pedido excluido.",
